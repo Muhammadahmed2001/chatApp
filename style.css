@@ -62,9 +62,10 @@ body{
     outline: 2PX;
     height: 40px;
     width: 100%;
-    border-bottom: 1px solid #81d679;
+    border-bottom: 5px solid #81d679;
     font-size: .9rem;
     padding: 8px 15px;
+    border-radius: 100px;
 }
 
 .form-section {

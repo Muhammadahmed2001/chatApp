@@ -13,15 +13,17 @@
 
     <div class="contanair">
         <div class="form-box">
-            <form class="form">
+            <div class="form">
+
                 <span class="title">Sign up</span>
                 <span class="subtitle">Create a free account with your email.</span>
                 <div class="form-container">
+                    <input id="userName" type="text" class="input" value="" placeholder="Enter your full name">
                     <input id="signUpEmail" type="email" class="input" value="" placeholder="Email">
                     <input id="signUpPassword" type="password" class="input" placeholder="Password">
                 </div>
-                <button onclick="signUp()">Sign up</button>
-            </form>
+                <button id="signUpBtn">Sign up</button>
+            </div>
             <div class="form-section">
                 <p>Have an account? <a href="signIn.html">Log in</a> </p>
             </div>
@@ -37,7 +39,7 @@
 
 
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>
