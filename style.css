@@ -1,7 +1,6 @@
-body {
-    background: #a5d49f !important;
+.signIn-body{
+margin: 15px;
 }
-
 .contanair {
     text-align: center;
     display: flex;
@@ -129,7 +128,8 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: #ecf0f3;
+    background: #a5d49f !important;
+    
 }
 
 .wrapper,

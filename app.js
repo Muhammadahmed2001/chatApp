@@ -1,7 +1,7 @@
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 const firebaseConfig = {
     apiKey: "AIzaSyAcf9p59QBOdLa3ANcwc1wx4dljjwJGSLg",
@@ -40,7 +40,7 @@ signUpBtn && signUpBtn.addEventListener("click", () => {
                 icon: 'success',
                 title: 'User register successfully',
             })
-
+            localStorage.setItem("uid", user.uid)
             location.href = "signin.html"
 
         })
@@ -69,6 +69,10 @@ signInBtn && signInBtn.addEventListener("click", () => {
                 icon: 'success',
                 title: 'User login successfully',
             })
+            localStorage.setItem("uid", user.uid)
+
+
+            location.href = "profile.html"
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -82,9 +86,25 @@ signInBtn && signInBtn.addEventListener("click", () => {
 })
 
 
+let logOut = document.getElementById("logOut");
+
+logOut && logOut.addEventListener("click", () => {
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+
+            const uid = localStorage.getItem("uid");
+
+        } else {
+
+        }
+    });
+})
+
+
 let updateProfile = document.getElementById("updateProfile");
 
-updateProfile.addEventListener("click", () => {
+updateProfile && updateProfile.addEventListener("click", () => {
     let file = document.getElementById("file-input");
     const mountainsRef = ref(storage, `images/${file.files[0].name}`);
     console.log(file.files[0].name)
