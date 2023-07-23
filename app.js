@@ -2,7 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 const firebaseConfig = {
     apiKey: "AIzaSyAcf9p59QBOdLa3ANcwc1wx4dljjwJGSLg",
     authDomain: "cahtapp-8aa63.firebaseapp.com",
@@ -15,6 +15,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const storage = getStorage();
+
 
 
 
@@ -34,14 +36,22 @@ signUpBtn && signUpBtn.addEventListener("click", () => {
     createUserWithEmailAndPassword(auth, signUpEmail.value, signUpPassword.value)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user, "done")
+            Swal.fire({
+                icon: 'success',
+                title: 'User register successfully',
+            })
+
             location.href = "signin.html"
 
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorMessage)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: errorMessage,
+            })
 
         });
 
@@ -55,15 +65,34 @@ signInBtn && signInBtn.addEventListener("click", () => {
         .then((userCredential) => {
 
             const user = userCredential.user;
-            console.log("done")
+            Swal.fire({
+                icon: 'success',
+                title: 'User login successfully',
+            })
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorMessage)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: errorMessage,
+            })
         });
 })
 
+
+let updateProfile = document.getElementById("updateProfile");
+
+updateProfile.addEventListener("click", () => {
+    let file = document.getElementById("file-input");
+    const mountainsRef = ref(storage, `images/${file.files[0].name}`);
+    console.log(file.files[0].name)
+    uploadBytes(mountainsRef, file.files[0]).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+    });
+
+})
 
 
 
