@@ -1,6 +1,7 @@
-.signIn-body{
-margin: 15px;
+.signIn-body {
+    margin: 15px;
 }
+
 .contanair {
     text-align: center;
     display: flex;
@@ -129,14 +130,18 @@ body {
     justify-content: center;
     min-height: 100vh;
     background: #a5d49f !important;
-    
+
 }
 
 .wrapper,
 .wrapper .img-area,
 .social-icons a,
 .buttons button {
-    background: #81d679;
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    
+    
+
     box-shadow: -3px -3px 7px #a3a0a0,
         3px 3px 5px #929297;
 }

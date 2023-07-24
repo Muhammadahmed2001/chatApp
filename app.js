@@ -2,7 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
+import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 const firebaseConfig = {
     apiKey: "AIzaSyAcf9p59QBOdLa3ANcwc1wx4dljjwJGSLg",
     authDomain: "cahtapp-8aa63.firebaseapp.com",
@@ -102,15 +102,50 @@ logOut && logOut.addEventListener("click", () => {
 })
 
 
-let updateProfile = document.getElementById("updateProfile");
+let file = document.getElementById("file-input");
+const uploadFile = (file) => {
+    return new Promise((resolve, reject) => {
+        const mountainsRef = ref(storage, `images/${file.name}`);
+        
+        const uploadTask = uploadBytesResumable(mountainsRef, file);
+        
+        
+        uploadTask.on('state_changed',
+        (snapshot) => {
+    
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                        case 'running':
+                        console.log('Upload is running');
+                        break;
+                    }
+                },
+                (error) => {
+                    reject(error)
+                },
+            () => {
+    
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    resolve(downloadURL);
+                });
+            }
+        );
+    
+        
+    })
+}
 
+
+let updateProfile = document.getElementById("updateProfile");
 updateProfile && updateProfile.addEventListener("click", () => {
-    let file = document.getElementById("file-input");
-    const mountainsRef = ref(storage, `images/${file.files[0].name}`);
-    console.log(file.files[0].name)
-    uploadBytes(mountainsRef, file.files[0]).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
-    });
+    uploadFile(file.files[0])
+    .then((res) => console.log("res=====>", res))
+    .catch(err => console.log(err))
+
 
 })
 
