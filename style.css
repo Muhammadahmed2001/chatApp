@@ -1,5 +1,10 @@
 .signIn-body {
     margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #a5d49f !important;
 }
 
 .contanair {
@@ -7,10 +12,20 @@
     display: flex;
     justify-content: center;
     margin-top: 100px;
+    position: absolute;
     /* display: none; */
 
 
 }
+
+.chat-img {
+    position: relative;
+    left: 100%;
+    z-index: 1;
+    
+
+}
+
 
 
 
@@ -125,12 +140,13 @@
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #a5d49f !important;
 
+
+}
+.chat-box{
+    /* height: 40%;
+    width: 40%; */
+    /* background-color: #0066ff; */
 }
 
 .wrapper,
@@ -139,8 +155,8 @@ body {
 .buttons button {
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    
-    
+
+
 
     box-shadow: -3px -3px 7px #a3a0a0,
         3px 3px 5px #929297;
