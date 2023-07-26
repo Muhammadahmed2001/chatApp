@@ -143,7 +143,10 @@ const uploadFile = (file) => {
 let updateProfile = document.getElementById("updateProfile");
 updateProfile && updateProfile.addEventListener("click", () => {
     uploadFile(file.files[0])
-    .then((res) => console.log("res=====>", res))
+    .then((res) =>  {
+        let profileImg = document.getElementById("profile-img");
+        profileImg.src = res
+    })
     .catch(err => console.log(err))
 
 
