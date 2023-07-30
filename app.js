@@ -3,6 +3,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
+import { getFirestore, setDoc } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 const firebaseConfig = {
     apiKey: "AIzaSyAcf9p59QBOdLa3ANcwc1wx4dljjwJGSLg",
     authDomain: "cahtapp-8aa63.firebaseapp.com",
@@ -16,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const storage = getStorage();
+const db = getFirestore(app);
 
 
 
@@ -34,8 +36,13 @@ let userName = document.getElementById("userName")
 signUpBtn && signUpBtn.addEventListener("click", () => {
     console.log(signUpPassword.value)
     createUserWithEmailAndPassword(auth, signUpEmail.value, signUpPassword.value)
-        .then((userCredential) => {
+        .then( async(userCredential) => {
             const user = userCredential.user;
+            await setDoc(doc(db, "users", user.uid), {
+                userName: userName.value,
+                email: signUpEmail.value,
+                password: signUpPassword.value
+              });
             Swal.fire({
                 icon: 'success',
                 title: 'User register successfully',
@@ -84,6 +91,12 @@ signInBtn && signInBtn.addEventListener("click", () => {
             })
         });
 })
+
+
+
+
+
+
 
 
 let logOut = document.getElementById("logOut");

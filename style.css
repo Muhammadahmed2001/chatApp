@@ -22,6 +22,7 @@
     position: relative;
     left: 100%;
     z-index: 1;
+    cursor: pointer;
 
 
 }
@@ -29,6 +30,9 @@
 .chat-main-div {
     display: flex;
     margin-top: 20px;
+    background-color:white;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
 
 
 }
