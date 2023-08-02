@@ -438,6 +438,7 @@
 
 .card {
     width: 70%;
+    
 }
 
 .user-name {
@@ -466,6 +467,7 @@
 .chat-user {
     width: 100%;
     text-align: center;
+    
 
 }
 .message-time{
